@@ -137,9 +137,9 @@ async start() {
 
   await this.delay(2000);
   console.log("bot StartBot");
-  this.appendMessage("bot START")
+  document.getElementById('response').innerHTML = 'bot started'
   await this.mine()
-  this.appendMessage(`Delay  min ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)
+  
   await this.delay(this.timerDelayCpu );
   
   while (true) {
@@ -148,7 +148,10 @@ async start() {
     if(document.getElementById("auto-claimnfts").checked == true){
       minedelay = await getMineDelay(wax.userAccount);
       // const RandomTimeWait = minedelay + Math.floor(1000 + (Math.random() * 15000))
-      this.appendMessage(`Cooldown for ${minedelay/60/1000}`)
+      // this.appendMessage(`Cooldown for ${minedelay/60/1000}`)
+      let date = new Date();
+      // boxMessage.value = (`${date.getHours}:${date.getMinutes} Mine cd is ${minedelay/60/1000}`)
+      document.getElementById('response').innerHTML = (`${date.getHours()}:${date.getMinutes()} Mine cd is ${minedelay/60/1000}`)
       await this.delay(minedelay);
 
 
@@ -206,8 +209,10 @@ async mine(){
         // this.firstMine = false;
         // this.previousMineDone = true;
         // this.checkMinedelay = true;
-        this.appendMessage(`Delay  min ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)
-                
+        // this.appendMessage(`Delay  min ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)
+        let date = new Date()
+        
+        document.getElementById('response').innerHTML  =  (`${date.getHours()}:${date.getMinutes()} Delay  min ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)  
         await this.delay(this.timerDelayCpu );
       
     
@@ -219,7 +224,7 @@ async mine(){
     let nonce = '';
     let message = ''
     const mine_work = await background_mine(wax.userAccount, bot.df)
-      nonce = mine_work.rand_str
+      nonce = mine_work
      // console.log('nonce-alien',nonce)
   //     message = 'Alien: ' + nonce
     
