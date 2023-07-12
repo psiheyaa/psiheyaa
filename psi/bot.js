@@ -128,9 +128,7 @@ async start() {
   const userAccount = await wax.login();
   document.getElementById("text-user").innerHTML = userAccount
   document.getElementsByTagName('title')[0].text = userAccount
-    const bagDifficulty = await getBagDifficulty(userAccount);
-    const landDifficulty = await getLandDifficulty(userAccount);
-    bot.df = bagDifficulty + landDifficulty;
+    
     
 
   

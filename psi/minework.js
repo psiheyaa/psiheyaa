@@ -26,7 +26,7 @@ const nextArr = (arr) => {
 
 async function findNonce (account,tx) {
     let last_mine_tx = (tx).slice(0, 16)
-    console.log(`tx is ${last_mine_tx}`)
+    
     let last_mine_arr = fromHex(last_mine_tx)
     account = nameToArray(account).slice(0, 8)
 
