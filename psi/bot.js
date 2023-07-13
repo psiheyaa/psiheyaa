@@ -62,75 +62,19 @@ async postData(url = '', data = {}, method = 'POST',header = {'Content-Type': 'a
   }
 }
 
-async checkCPU (){
-  let result = true
-  let i = 0;
-  let accountDetail = {}
-  while(result){
-    if(i%2 > 0){
-      accountDetail = await this.postData('https://wax.cryptolions.io/v2/state/get_account?account='+wax.userAccount, {}, 'GET')
-      accountDetail = accountDetail.account;
-    }else{
-      accountDetail = await this.postData('https://wax.pink.gg/v1/chain/get_account', { account_name: wax.userAccount }) //https://api.waxsweden.org
-    }
-    if(accountDetail){
-      i ++;
-      const rawPercent = ((accountDetail.cpu_limit.used/accountDetail.cpu_limit.max)*100).toFixed(2)
-      console.log(`%c[Bot] rawPercent : ${rawPercent}%`, 'color:green')
-      const ms = accountDetail.cpu_limit.max - accountDetail.cpu_limit.used;
-      this.appendMessage(`CPU ${rawPercent}% : ${ms} ms`)
-      if(rawPercent < this.checkCpuPercent){
-        result = false;
-      }else if(i > 2){
-        result = false;
-        this.appendMessage(`Check CPU ${i} times --> mine`)    
-      }  
-    }
-    
-    if(result && accountDetail){
-      const randomTimer = Math.floor(Math.random() * 30001)
-      const delayCheckCpu = this.timerDelayCpu
-      this.appendMessage(`CPU delay check ${Math.ceil(delayCheckCpu/1000/60)} min`)
-      this.countDown(delayCheckCpu + randomTimer)
-      await this.delay(delayCheckCpu + randomTimer);
-    }
-  }
-}
 
-appendMessage(msg , box = ''){
-  const dateNow = moment().format('DD/MM/YYYY H:mm:ss');
-  const boxMessage = document.getElementById("box-message"+box)
-  boxMessage.value += '\n'+ `${dateNow} : ${msg}`
-  boxMessage.scrollTop = boxMessage.scrollHeight;
-}
 
-countDown(countDown){
-  clearInterval(this.interval);
-  let countDownDisplay = Math.floor(countDown/1000)
-  this.interval = setInterval(function() {
-    document.getElementById("text-cooldown").innerHTML = countDownDisplay + " Sec"
-    countDown = countDown - 1000;
-    countDownDisplay = Math.floor(countDown/1000)
-    if (countDown < 1000) {
-      clearInterval(this.interval);
-      document.getElementById("text-cooldown").innerHTML = "Go mine";
-    }
-  }, 1000);
-}
 
-async stop() {
-  this.isBotRunning = false;
-  this.appendMessage("bot STOP")
-  console.log(`%c[Bot] stop`, 'color:green');
-}
+
+
 
 async start() {
   const userAccount = await wax.login();
   document.getElementById("text-user").innerHTML = userAccount
   document.getElementsByTagName('title')[0].text = userAccount
-    const bagDifficulty = await getBagDifficulty(userAccount);
-    const landDifficulty = await getLandDifficulty(userAccount);
-    bot.df = bagDifficulty + landDifficulty;
+  const cpuTimer = parseFloat(document.getElementById("cpu-timer").value) 
+  bott.timerDelayCpu = (cpuTimer * 60) * 1000;
+    
     
 
   
@@ -140,19 +84,19 @@ async start() {
   document.getElementById('response').innerHTML = 'bot started'
   await this.mine()
   
-  await this.delay(this.timerDelayCpu );
+ 
   
   while (true) {
     let minedelay = 0
 
     if(document.getElementById("auto-claimnfts").checked == true){
       minedelay = await getMineDelay(wax.userAccount);
-      // const RandomTimeWait = minedelay + Math.floor(1000 + (Math.random() * 15000))
+      const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 15000))
       // this.appendMessage(`Cooldown for ${minedelay/60/1000}`)
       let date = new Date();
       // boxMessage.value = (`${date.getHours}:${date.getMinutes} Mine cd is ${minedelay/60/1000}`)
-      document.getElementById('response').innerHTML = (`${date.getHours()}:${date.getMinutes()} Mine cd is ${minedelay/60/1000}`)
-      await this.delay(minedelay);
+      document.getElementById('response').innerHTML = (`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} Mine cd is ${ (minedelay/60/1000).toFixed(1) }`)
+      await this.delay(minedelay+RandomTimeWait);
 
 
 
@@ -212,8 +156,10 @@ async mine(){
         // this.appendMessage(`Delay  min ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)
         let date = new Date()
         
-        document.getElementById('response').innerHTML  =  (`${date.getHours()}:${date.getMinutes()} Delay  min ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)  
+        document.getElementById('response').innerHTML  =  (` ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} Delay ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)  
         await this.delay(this.timerDelayCpu );
+        
+
       
     
     

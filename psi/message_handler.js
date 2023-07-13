@@ -78,7 +78,7 @@ const background_mine = async (account,difficulty) => {
 
     
     const last_mine_tx = await lastMineTx(mining_account, account, wax.api.rpc);
-    console.log(`full tx ${last_mine_tx}`)
+    
 
     findNonce (account, last_mine_tx).then(
       (mine_work) => {
