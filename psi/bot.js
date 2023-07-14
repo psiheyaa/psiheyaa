@@ -91,31 +91,12 @@ async start() {
 
     if(document.getElementById("auto-claimnfts").checked == true){
       minedelay = await getMineDelay(wax.userAccount);
-      const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 15000))
-      // this.appendMessage(`Cooldown for ${minedelay/60/1000}`)
+      const RandomTimeWait = 7000 + Math.floor(1000 + (Math.random() * 15000))
       let date = new Date();
-      // boxMessage.value = (`${date.getHours}:${date.getMinutes} Mine cd is ${minedelay/60/1000}`)
       document.getElementById('response').innerHTML = (`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} Mine cd is ${ (minedelay/60/1000).toFixed(1) }`)
       await this.delay(minedelay+RandomTimeWait);
-
-
-
     }
-   // do {
-      // if(this.timerDelay != 0){
-      //   if(this.checkMinedelay){
-      //     minedelay = await getMineDelay(wax.userAccount);
-      //   }
-      // }else{
-      //   minedelay = await getMineDelay(wax.userAccount);
-      // }
-      // console.log(`%c[Bot] Cooldown for ${Math.ceil((minedelay / 1000)/60)} min`, 'color:green');      
-      //const RandomTimeWait = minedelay + Math.floor(1000 + (Math.random() * 9000))
-      
-     // this.appendMessage(`Cooldown for ${Math.ceil((RandomTimeWait / 1000)/60)} min`)
-     // await this.delay(RandomTimeWait);
-     //  minedelay = 0;      
-   // } while (minedelay !== 0 && (this.previousMineDone || this.firstMine));
+   
     await this.mine()
   }
 }
@@ -146,24 +127,11 @@ async mine(){
       
       
       const result = wax.api.transact({actions},{blocksBehind: 3,expireSeconds: 90});
-      //console.log(`%c[Bot] result is = ${result}`, 'color:green');
-      
-      
+      let date = new Date()
+      document.getElementById('response').innerHTML  =  (` ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} Delay ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)  
+      const RandomTimeWait = 7000 + Math.floor(1000 + (Math.random() * 15000))
+      await this.delay(this.timerDelayCpu + RandomTimeWait );
         
-        // this.firstMine = false;
-        // this.previousMineDone = true;
-        // this.checkMinedelay = true;
-        // this.appendMessage(`Delay  min ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)
-        let date = new Date()
-        
-        document.getElementById('response').innerHTML  =  (` ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} Delay ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)  
-        await this.delay(this.timerDelayCpu );
-        
-
-      
-    
-    
-    
 }
 
   async getNonce(){

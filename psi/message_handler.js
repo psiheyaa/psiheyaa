@@ -71,16 +71,9 @@ const getLandDifficulty = async function (account) {
 
 const background_mine = async (account,difficulty) => {
   return new Promise(async (resolve, reject) => {
-    // const bagDifficulty = await getBagDifficulty(account);
-    // const landDifficulty = await getLandDifficulty(account);
-    // let difficulty = bagDifficulty + landDifficulty;
+  const last_mine_tx = await lastMineTx(mining_account, account, wax.api.rpc);
     
-
-    
-    const last_mine_tx = await lastMineTx(mining_account, account, wax.api.rpc);
-    
-
-    findNonce (account, last_mine_tx).then(
+findNonce (account, last_mine_tx).then(
       (mine_work) => {
         
         resolve(mine_work);

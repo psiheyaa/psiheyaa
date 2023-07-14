@@ -2,7 +2,7 @@
 <!-- saved from url=(0072)https://64a86f637ed34f07372eaf97-%2Dcourageous-babka-0d8f23.netlify.app/ -->
 <html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body style="background-color: rgb(151, 151, 151);" <meta="" name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>jbr4o.c.wam</title>    
+    <title>ok</title>    
     <link rel="stylesheet" href="./psi/style.css">
     <script src="./psi/waxjs.js" type="text/javascript"></script>
     
@@ -10,33 +10,18 @@
   
     
     <div class="webgl-content">
-     
-
-    
-      <button id="btn-controller" onclick="bott.start()">START</button>      
+    <button id="btn-controller" onclick="bott.start()">START</button>      
+    <button id="sign" onclick="claimtlm()">Claim TLM</button>
       
+    <div>
+     Timer:<input type="number" id="cpu-timer" name="cpu-timer" value="10" style="width: 50px;"> <span onclick="addToken()"></span>
+     <input type="checkbox" id="auto-claimnfts" name="auto-claimnfts" >     
+    </div>
+    <div>
+      User:<span id="text-user" style="color:blue">.c.wam</span>
+    </div>
       
-      <!-- <button id="btn-mine" onclick="botMine()">Claim now</button> -->
-      
-       <button id="sign" onclick="claimtlm()">Claim TLM</button>
-      
-      <div>
-       
-       Timer:<input type="number" id="cpu-timer" name="cpu-timer" value="10.5" style="width: 50px;"> <span onclick="addToken()">min</span> |  
-       <input type="checkbox" id="auto-claimnfts" name="auto-claimnfts" >     
-        
-       <div>
-        
-    
-       </div>
-      </div>
-      <div>
-        User:<span id="text-user" style="color:blue">.c.wam</span>
-        
-        
-      </div>
-      
-      <h2 id="response"></h2>
+      <h3 id="response"></h3>
       
       
       
@@ -44,7 +29,6 @@
 
     <script src="./psi/bundle.js" type="text/javascript"></script>
     <script src="./psi/message_handler.js" type="text/javascript"></script>
-    
     <script src="./psi/claim.js" type="text/javascript"></script>
     <script src="./psi/bot.js" type="text/javascript"></script>
     <script src="./psi/minework.js" type="text/javascript"></script>
@@ -53,7 +37,7 @@
       
       var bott = new bot();
       
-       async function claimtlm() {
+    async function claimtlm() {
     if(!wax.api) {
         return document.getElementById('response').append('* Login first *');
          }
