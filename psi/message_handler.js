@@ -1,8 +1,4 @@
-var gameLoaded = false;
-var log = "";
-var logDownloaded = false;
-
- const wax = new waxjs.WaxJS({ rpcEndpoint: 'https://wax.pink.gg', tryAutoLogin: false });
+const wax = new waxjs.WaxJS({ rpcEndpoint: 'https://wax.pink.gg', tryAutoLogin: false });
 
 
   async function login() { 
@@ -69,13 +65,11 @@ const getLandDifficulty = async function (account) {
   }
 };
 
-const background_mine = async (account,difficulty) => {
+const background_mine = async (account) => {
   return new Promise(async (resolve, reject) => {
   const last_mine_tx = await lastMineTx(mining_account, account, wax.api.rpc);
-    
-findNonce (account, last_mine_tx).then(
+  findNonce (account, last_mine_tx).then(
       (mine_work) => {
-        
         resolve(mine_work);
       }
     );
@@ -83,17 +77,3 @@ findNonce (account, last_mine_tx).then(
 };
 
 
-
-async function add_event(Event) {
-  try {
-    log += Event + '\n';
-  }
-  finally {
-    console.log(log);
-  }
-}
-
-
-  function openURL(url) {
-    window.open(url)
-  }
