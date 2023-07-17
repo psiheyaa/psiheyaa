@@ -12,6 +12,7 @@
     <div class="webgl-content">
     <button id="btn-controller" onclick="bott.start()">START</button>      
     <button id="sign" onclick="claimtlm()">Claim TLM</button>
+    <button id="mine" onclick="bott.mine()">mine</button>
       
     <div>
      Timer:<input type="number" id="cpu-timer" name="cpu-timer" value="10" style="width: 50px;"> <span onclick="addToken()"></span>
@@ -67,16 +68,7 @@
     
     }
 
-      async function botCheckDelay(){
-        const userAccount = document.getElementById("text-user").innerHTML
-        if(userAccount != '' && userAccount != 'xxx.wax'){
-          const delay = await getMineDelay(wax.userAccount)
-          alert('MineDelay : ' + delay + ' ms')
-        }else{
-          alert("userAccount isEmpty")
-        }
-      }
-
+    
       
 
     

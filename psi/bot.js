@@ -30,6 +30,8 @@ async start() {
   console.log("bot StartBot");
   document.getElementById('response').innerHTML = 'bot started'
   await this.mine()
+  const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 15000))
+  await this.delay(this.timerDelayCpu + RandomTimeWait );
   
  
   
@@ -39,19 +41,19 @@ async start() {
     if(document.getElementById("auto-claimnfts").checked == true){
       minedelay = await getMineDelay(wax.userAccount);
       const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 15000))
-      let date = new Date();
-      document.getElementById('response').innerHTML = (`${date.getHours()}:${date.getMinutes()} Mine cd is ${ (minedelay/60/1000).toFixed(1) }`)
+      // let date = new Date();
+      // document.getElementById('response').innerHTML = (`${date.getHours()}:${date.getMinutes()} Mine cd is ${ (minedelay/60/1000).toFixed(1) }`)
       await this.delay(minedelay+RandomTimeWait);
     }
    
     await this.mine()
+    const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 15000))
+    await this.delay(this.timerDelayCpu + RandomTimeWait );
   }
 }
 
 async mine(){
- 
-
-    const nonce = await this.getNonce()
+ const nonce = await this.getNonce()
     let actions = [
       {
         account: "m.federation",
@@ -68,16 +70,11 @@ async mine(){
         },
       },
     ];
-    
-   
+    const result = wax.api.transact({actions},{blocksBehind: 3,expireSeconds: 90});
+    //console.log(result)
+    // let date = new Date()
+      // document.getElementById('response').innerHTML  =  (` ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} Delay ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)  
       
-      
-      
-      const result = wax.api.transact({actions},{blocksBehind: 3,expireSeconds: 90});
-      let date = new Date()
-      document.getElementById('response').innerHTML  =  (` ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} Delay ${Math.ceil((this.timerDelayCpu / 1000)/60)} min`)  
-      const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 15000))
-      await this.delay(this.timerDelayCpu + RandomTimeWait );
         
 }
 
