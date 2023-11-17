@@ -1,4 +1,4 @@
-const wax = new waxjs.WaxJS({ rpcEndpoint: 'https://wax.pink.gg', tryAutoLogin: false });
+const wax = new waxjs.WaxJS({ rpcEndpoint: 'http://api.waxsweden.org', tryAutoLogin: false });
 
 
   async function login() { 
