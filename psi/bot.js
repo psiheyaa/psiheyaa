@@ -30,7 +30,7 @@ async start() {
   console.log("bot StartBot");
   document.getElementById('response').innerHTML = 'bot started'
   await this.mine()
-  const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 20000))
+  const RandomTimeWait = 10000 + Math.floor(1000 + (Math.random() * 40000))
   await this.delay(this.timerDelayCpu + RandomTimeWait );
   
  
@@ -40,7 +40,7 @@ async start() {
 
     if(document.getElementById("auto-claimnfts").checked == true){
       minedelay = await getMineDelay(wax.userAccount);
-      const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 15000))
+      const RandomTimeWait = 10000 + Math.floor(1000 + (Math.random() * 40000))
       // let date = new Date();
       // document.getElementById('response').innerHTML = (`${date.getHours()}:${date.getMinutes()} Mine cd is ${ (minedelay/60/1000).toFixed(1) }`)
       await this.delay(minedelay+RandomTimeWait);
