@@ -30,7 +30,7 @@ async start() {
   console.log("bot StartBot");
   document.getElementById('response').innerHTML = 'bot started'
   await this.mine()
-  const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 15000))
+  const RandomTimeWait = 5000 + Math.floor(1000 + (Math.random() * 20000))
   await this.delay(this.timerDelayCpu + RandomTimeWait );
   
  
